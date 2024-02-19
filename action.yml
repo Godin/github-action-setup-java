@@ -1,0 +1,26 @@
+name: ''
+inputs:
+  version:
+    description: ''
+runs:
+  using: "composite"
+  steps:
+    - if: ${{ inputs.version == '5' }}
+      name: 'Setup JDK 5'
+      shell: bash
+      run: |
+        mkdir .jdk5
+        curl -L "https://downloads.sourceforge.net/project/eclemma/jdk-5u22-linux-x64.tar.gz" -o .jdk5/jdk.tar.gz
+        tar -xzf .jdk5/jdk.tar.gz -C .jdk5 --strip-components 1
+        .jdk5/bin/java -version
+        echo "JAVA_HOME_5_X64=$PWD/.jdk5" >> $GITHUB_ENV
+    - if: ${{ inputs.version == '23' }}
+      uses: oracle-actions/setup-java@8a13c93dd514d680ef9b3b70b7549b90be7d314d # main
+      with:
+        website: jdk.java.net
+        release: 23
+    - if: ${{ inputs.version != '5' && inputs.version != '23' }}
+      uses: actions/setup-java@387ac29b308b003ca37ba93a6cab5eb57c8f5f93 # v4.0.0
+      with:
+        distribution: 'zulu'
+        java-version: ${{ inputs.version }}
