@@ -15,7 +15,7 @@ runs:
         .jdk5/bin/java -version
         echo "JAVA_HOME_5_X64=$PWD/.jdk5" >> $GITHUB_ENV
     - if: ${{ inputs.version == '23' }}
-      uses: oracle-actions/setup-java@8a13c93dd514d680ef9b3b70b7549b90be7d314d # main
+      uses: oracle-actions/setup-java@4c0033fae1ec4216aa6da43b8bead5088bae3d2d # main
       with:
         website: jdk.java.net
         release: 23
