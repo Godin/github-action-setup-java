@@ -6,13 +6,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: ./
+      - uses: ./setup-java
         with:
           version: 23
-      - uses: ./
+      - uses: ./setup-java
         with:
           version: 5
-      - uses: ./
+      - uses: ./setup-java
         with:
           version: 17
       - run: env
